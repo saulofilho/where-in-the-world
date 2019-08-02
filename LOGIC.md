@@ -1,6 +1,6 @@
 This is a logic test.
 
-Given the following 2d matrix:
+Given the following 2d matrix (this is a sample input, you should consider alternative inputs):
 
 ```
 [[1,1,1,1],
