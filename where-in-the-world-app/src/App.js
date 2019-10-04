@@ -1,13 +1,17 @@
 import React, { Component } from 'react';
-import './App.css';
-import Header from './Components/Header';
+import { Link } from 'react-router-dom';
+import { Main } from '../src/theme/AppStyles';
+import { UlGrid } from '../src/theme/AppStyles';
 import api from './services/api';
+import Header from './Components/Header/Header';
+import CountryCard from './Components/CountryCard/CountryCard';
+import Filter from './Components/Filters/Filters';
 
 class App extends Component {
   constructor() {
     super();
     this.state = {
-      restData: []
+      countriesData: []
     };
   }
 
@@ -15,53 +19,31 @@ class App extends Component {
     api
       .get()
       .then((res) => {
-      console.log("Infos:", res);
-      this.setState({ restData: res.data.name });
+      console.log("Infos:", res.data);
+      this.setState({ countriesData: res.data });
     });
   }
 
   render() {
-    const { restData } = this.state;
+    const { countriesData } = this.state;
       return (
-        <div>
+        <Main>
           <Header />
+          <Filter />
           <div>
-            { restData.map((name) => (
-              <div>
-                <p>{name.name}</p>
-              </div>
-            ))}
+            <UlGrid>
+              { countriesData.map(country => (
+                <li key={ country.alpha3Code } className="li-div">
+                  <Link to="/CountryPage">
+                  <CountryCard country={ country } />
+                  </Link>
+                </li>
+              ))};
+            </UlGrid>
           </div>
-        </div>
+        </Main>
       );
   }
 }
 
 export default App;
-
-
-
-/*
-DEFAULT 
-
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
-*/
