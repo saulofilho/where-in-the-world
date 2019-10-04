@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { Main } from '../src/theme/AppStyles';
-import { UlGrid } from '../src/theme/AppStyles';
+import { Main, UlGrid, DivGrid } from '../src/theme/AppStyles';
 import api from './services/api';
 import Header from './Components/Header/Header';
 import CountryCard from './Components/CountryCard/CountryCard';
@@ -30,17 +29,17 @@ class App extends Component {
         <Main>
           <Header />
           <Filter />
-          <div>
+          <DivGrid>
             <UlGrid>
               { countriesData.map(country => (
-                <li key={ country.alpha3Code } className="li-div">
+                <li key={ country.alpha3Code }>
                   <Link to="/CountryPage">
                   <CountryCard country={ country } />
                   </Link>
                 </li>
               ))};
             </UlGrid>
-          </div>
+          </DivGrid>
         </Main>
       );
   }

@@ -5,8 +5,7 @@ export default class Search extends Component {
     render() {
       return (
         <Form>
-            <button><ion-icon name="search"></ion-icon></button>
-            <input type="text" name="countrys" placeholder="Search for a country..."></input>
+            <input type="text" name="countries" placeholder="Search for a country..."></input>
         </Form>
       );
     }
