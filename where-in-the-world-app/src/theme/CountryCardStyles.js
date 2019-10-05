@@ -3,7 +3,10 @@ import styled from 'styled-components';
 export const Card = styled.div`
     color: hsl(0, 0%, 100%);
     border-radius: 3px;
-    height: 350px;
+    height: 400px;
+    @media screen and (max-width: 600px) {
+        height: auto;
+    }
     -webkit-box-shadow: 1px 1px 3px rgba(0,0,0,.1);
     box-shadow: 1px 1px 3px rgba(0,0,0,.1);
     -webkit-transition: all .3s ease;
@@ -16,6 +19,10 @@ export const Card = styled.div`
         margin: 0 auto;
         width: 100%;
         height: 200px;
+        object-fit: cover;
+        @media screen and (max-width: 600px) {
+            height: auto;
+        }
     }
     p {
         color: hsl(200, 15%, 8%);
