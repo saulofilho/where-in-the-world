@@ -1,7 +1,10 @@
 import styled from 'styled-components';
 
 export const Form = styled.form`
-  margin: 0;
+  position: relative;
+  @media screen and (max-width: 600px) {
+    display: flex;
+  }
     input {
       font-size: 14px;
       height: 40px;
@@ -17,5 +20,11 @@ export const Form = styled.form`
       background-repeat: no-repeat;
       background-size: 20px;
       background-position: 15px;
+      @media screen and (max-width: 800px) {
+        width: 200px;
+      }
+      @media screen and (max-width: 600px) {
+        width: 100%;
+      }
     }
 `;

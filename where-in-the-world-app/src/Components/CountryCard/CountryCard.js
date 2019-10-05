@@ -6,7 +6,7 @@ export default class CountryCard extends Component {
     const {country} = this.props
     return (
       <Card>
-        <img src={country.flag} alt={country.name} />
+        <img src={country.flag} alt={country.name}/>
         <Infos>
           <Title16>{country.name}</Title16>
           <p><span>Population:</span> {country.population}</p>

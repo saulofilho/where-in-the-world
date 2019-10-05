@@ -16,12 +16,17 @@ export const UlGrid = styled.ul`
   justify-items: center;
   list-style: none;
   grid-gap: 2rem;
-  @media screen and (max-width: 992px) {
-    grid-gap: 10px;
+  @media screen and (max-width: 1200px) {
+    grid-gap: 1.5rem;
+    grid-template-columns: repeat(3, 1fr);
+  }
+  @media screen and (max-width: 900px) {
+    grid-gap: 1rem;
     grid-template-columns: repeat(2, 1fr);
   }
-  @media screen and (max-width: 425px) {
-    grid-gap: 10px;
+  @media screen and (max-width: 600px) {
+    grid-gap: 1rem;
+    grid-template-columns: 1fr;
   }
   li {
     width: 100%;

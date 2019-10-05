@@ -3,16 +3,16 @@ import Header from './Components/Header/Header';
 
 class CountryPage extends Component {
   render() {
-    const {country} = this.props.match.params.country.name
+    const {country} = this.props.match.params
       return (
-        <div className="main-page-div">
+        <div>
           <Header />
-            <div className="page-div">
-              <div className="all-div">
+            <div>
+              <div>
                 <button>back</button>
-                <img src={country.flag} alt={country.name} width="250" />
-                <div className="infos-div">
-                  <p className="country-name-div">{country.name}</p>
+                <img src={country.flag} alt={country.name}/>
+                <div>
+                  <p>{country.name}</p>
                   <p>Native Name: {country.nativeName}</p>
                   <p>Population: {country.population}</p>
                   <p>Region: {country.region}</p>
