@@ -9,7 +9,7 @@ export const DivGrid = styled.div`
   margin: 0 auto;
 `;
 
-export const UlGrid = styled.ul`
+export const Grid = styled.ul`
   padding-inline-start: 0;
   margin: 2rem 3rem;
   display: grid;

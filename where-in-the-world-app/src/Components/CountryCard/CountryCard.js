@@ -3,7 +3,7 @@ import { Card, Infos, Title16 } from '../../theme/CountryCardStyles';
 
 export default class CountryCard extends Component {
   render() {
-    const {country} = this.props
+    const {country} = this.props;
     return (
       <Card>
         <img src={country.flag} alt={country.name}/>
@@ -15,5 +15,5 @@ export default class CountryCard extends Component {
         </Infos>
       </Card>
     );
-  }
-}
+  };
+};

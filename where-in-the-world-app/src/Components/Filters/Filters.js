@@ -11,5 +11,5 @@ export default class Filters extends Component {
           <Select />
         </FiltersGrid>
       );
-    }
-  }
+    };
+  };
