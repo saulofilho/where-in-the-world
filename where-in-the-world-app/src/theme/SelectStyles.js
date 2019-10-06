@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const SelectRegion = styled.form`
+export const SelectRegion = styled.div`
   position: absolute;
   right: 0;
   top: 0;

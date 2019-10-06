@@ -1,16 +1,17 @@
 import React, { Component } from 'react';
-import { Route, Switch, Link } from 'react-router-dom'
-import { Main, UlGrid, DivGrid } from '../src/theme/AppStyles';
+import { BrowserRouter, Route, Link } from 'react-router-dom';
+import Select from 'react-select';
+import { Main, Grid, DivGrid } from '../src/theme/AppStyles';
 import api from './services/api';
 import Header from './Components/Header/Header';
 import CountryCard from './Components/CountryCard/CountryCard';
-import Filter from './Components/Filters/Filters';
+import FiltersGrid from './Components/Filters/Filters';
 import CountryPage from './CountryPage';
-import Select from 'react-select';
+import Search from './Components/Filters/Search/Search';
 
 class App extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       countriesData: [],
       search: ""
@@ -22,7 +23,9 @@ class App extends Component {
       .get()
       .then((res) => {
       console.log("Payload:", res);
-      this.setState({ countriesData: res.data });
+      this.setState({ 
+        countriesData: res.data 
+      });
     });
   };
 
@@ -30,59 +33,78 @@ class App extends Component {
     this.setState({ search: e.target.value });
   };
 
+handleToUpdate = (e) => {
+    this.onchange(e);
+  };
+
   render() {
+    var	handleToUpdate	=	this.handleToUpdate;
     const { countriesData } = this.state;
     const { search } = this.state;
     const filteredCountries = countriesData.filter( country =>{
       return country.name.toLowerCase().indexOf( search.toLowerCase() ) !== -1
     });
+    
     const selectItem = this.state.countriesData.map(region =>
-      <option key={ region.name }>{region.name}</option>
+      <option key={ region.name }>{ region.name }</option>
     );
 
     return (
-      <Main>
+    <BrowserRouter>
+      <Route path="/" exact strict>
+        <Main>
         <Header />
-        <Filter />
-        <div>
-          { countriesData.map(teste => {
-              const { region } = teste;
-              return (
-                <div key={region}>
-                  <p>{region}</p>
-                </div>
-              );
-          }) }
-        </div>
+        <FiltersGrid>
+        
+        </FiltersGrid>
+
+        <Search handleToUpdate = {handleToUpdate.bind(this)} />
+
+        
+
         <DivGrid>
+          
           <Select
-            onChange={country => console.log(country.label, country.value)}
-            options={ selectItem }
+            options = {filteredCountries}
             placeholder="Filter by Region"
           />
-          <UlGrid>
+          
           <input type="text" name="countries" placeholder="Search for a country..." onChange={this.onchange}></input>
+          <Grid>
+            
             { filteredCountries.map(country => (
               <li key={ country.alpha3Code }>
-                <Link to="/CountryPage/:alpha3Code">
+                
+                <Link to={"/" + country.alpha3Code } >
                   <CountryCard country={ country } />
                 </Link>
               </li>
             ))};
-          </UlGrid>
+          </Grid>
         </DivGrid>
       </Main>
-    );
-  };
-
-  function() {
-    return (
-      <Switch>
-        <Route exact path="/" component={App} />
-        <Route path="/CountryPage/:alpha3Code" component={CountryPage} />
-      </Switch>
+      </Route>
+      <Route path="/:countryPage" exact strict component={CountryPage} />
+      
+    </BrowserRouter>
     );
   };
 };
 
 export default App;
+
+
+// <Route component={() => <div>Page not found!</div>} />
+
+
+/* 
+  <div>
+  { countriesData.map(teste => {
+      const { region } = teste;
+      return (
+        <div key={region}>
+          <p>{region}</p>
+        </div>
+      );
+  }) }
+</div> */
