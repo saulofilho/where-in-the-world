@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Card, Infos, Title16 } from '../../theme/CountryCardStyles';
+import { Card, Infos, Title16 } from '../../themes/CountryCardStyles';
 
 export default class CountryCard extends Component {
   render() {

@@ -1,30 +1,77 @@
 import React, { Component } from 'react';
-import Header from './Components/Header/Header';
 import api from './services/api';
+import { Main, MainHeader } from '../src/themes/AppStyles';
+import TitleHeader from './Components/Header/TitleHeader';
 
 class CountryPage extends Component {
   state = {
-    countryData: []
+    countryData: [],
+    checked: localStorage.getItem("theme") === "dark" ? true : false,
+    theme: localStorage.getItem("theme"),
+    id: null
   };
+
+  //API
   componentDidMount() {
-    const id = this.props.match.params;
-      api
-        .get('', + id)
-        .then((res) => {
-        console.log("Payload CountryPage:", res);
-        this.setState({ 
-          countryData: res.data 
-      });
+    console.log("teste", this.props);
+    let id = this.props.match.params.countryPage;
+    this.setState({
+      id: id
+    })
+    api
+      .get("/name/"+id)
+      .then((res) => {
+      console.log("Payload CountryPage:", res);
+      this.setState({ 
+        countryData: res.data 
     });
+  });
   };
+
+  //DarkMode
+    //DarkMode
+    toggleThemeChange = () => {
+      const { checked } = this.state;
+      if (checked === false) {
+        localStorage.setItem("theme", "dark");
+        document
+          .getElementsByTagName("HTML")[0]
+          .setAttribute("data-theme", localStorage.getItem("theme"));
+        this.setState({
+          checked: true
+        });
+      } else {
+        localStorage.setItem("theme", "light");
+        document
+          .getElementsByTagName("HTML")[0]
+          .setAttribute("data-theme", localStorage.getItem("theme"));
+        this.setState({
+          checked: false
+        });
+      }
+    };
+
+
+  //Render
   render() {
     const { countryData } = this.state;
-    const filteredCountry = countryData.filter( country =>{
-      return country.alpha3Code.indexOf(countryData);
-    });
+
     return (
+    <Main>
+      <MainHeader>
+        <TitleHeader />
+        <div className="div-switch">
+          <label className="switch">
+            <input
+              type="checkbox"
+              defaultChecked={this.state.checked}
+              onChange={() => this.toggleThemeChange()}
+            />
+          <span className="slider round" />
+          </label>
+        </div>
+      </MainHeader>
       <div>
-        <Header />
         <br/>
         <br/>
         <br/>
@@ -38,10 +85,11 @@ class CountryPage extends Component {
             </a>
           </button>
         </div>
-            { filteredCountry.map(singleCountry => {
+            { countryData.map(singleCountry => {
                 return (
                   <div key={singleCountry.alpha3Code}>
                     <div>
+                    <img src={singleCountry.flag} alt={singleCountry.name}/>
                     <p>{singleCountry.name}</p>
                     <p>Native Name: {singleCountry.nativeName}</p>
                     </div>
@@ -49,8 +97,7 @@ class CountryPage extends Component {
                 );
             }) }
           </div>
-
-
+    </Main>
     );
   };
 };
