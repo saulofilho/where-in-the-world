@@ -19,6 +19,10 @@ export const MainHeader = styled.header`
   .div-switch {
     justify-self: end;
     margin: 0 3rem;
+    @media screen and (max-width: 800px) {
+        margin: 1rem;
+      }
+    }
   }
   .div-switch:before {
     content: "Dark Mode";

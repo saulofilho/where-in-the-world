@@ -1,6 +1,9 @@
 @import url('https://fonts.googleapis.com/css?family=Nunito+Sans:300,600,800&display=swap');
 @import "../node_modules/normalize.css/normalize.css";
 
+/*
+color guide & var
+*/
 html {
   --bg-color: hsl(0, 0%, 98%);
   --element-color: hsl(0, 0%, 100%);
@@ -32,13 +35,39 @@ header, h1, li, h2, p {
   background-color: var(--element-color);
 }
 
-div .css-yk16xz-control, div .css-1pahdxg-control {
+div .css-yk16xz-control, 
+div .css-1pahdxg-control {
   background: var(--element-color);
   background-color: var(--element-color);
   color: var(--input);
 }
 
-form input {
+form input,
+button {
   background: var(--element-color);
   color: var(--input);
+}
+
+.css-26l3qy-menu {
+  color: var(--input);
+}
+
+.css-1ml51p6-MenuList {
+  background: var(--element-color);
+}
+
+a {
+  text-decoration: none;
+}
+
+.sc-gqjmRU li {
+  background-color: var(--bg-color);
+}
+
+.sc-gqjmRU li h2 {
+  background-color: var(--bg-color);
+}
+
+.sc-gqjmRU li p {
+  background-color: var(--bg-color);
 }

@@ -16,6 +16,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.handleToUpdate = this.handleToUpdate.bind(this);
+    this.changeRegion = this.changeRegion.bind(this);
     this.state = {
       countriesData: [],
       search: "",
@@ -30,7 +31,6 @@ class App extends Component {
     api
       .get("all")
       .then((res) => {
-      console.log("Payload:", res);
       this.setState({ 
         countriesData: res.data 
       });
@@ -72,7 +72,11 @@ class App extends Component {
     this.onchange(e);
   };
 
-//Render
+  changeRegion = e => {
+    this.setState({region: e.value});
+  };
+  
+  //Render
   render() {
     const	handleToUpdate	=	this.handleToUpdate;
     const { countriesData } = this.state;
@@ -81,7 +85,7 @@ class App extends Component {
       return country.name.toLowerCase().indexOf(search.toLowerCase()) !== -1;
     });
     if (region) {
-      let regionMap = countriesData.filter(country => {
+      filteredCountries = countriesData.filter(country => {
         return country.region.toLowerCase().indexOf(region.toLowerCase()) !== -1;
       });
     };
@@ -89,9 +93,11 @@ class App extends Component {
     return (
       <BrowserRouter>
           <Route path="/" exact strict>
-            <Main className="teste">
+            <Main>
             <MainHeader>
+            <Link to={"/"} >
               <TitleHeader />
+            </Link>
               <div className="div-switch">
                 <label className="switch">
                   <input
@@ -106,16 +112,15 @@ class App extends Component {
             <Forms>
               <Search handleToUpdate={handleToUpdate.bind(this)} />
               <SelectRegion>
-              <Select
+                <Select
                   options={uniqBy(                  
-                    filteredCountries.map(country => {
-                    console.log("log:", filteredCountries);
+                    countriesData.map(country => {
                     return {
                       'value': country.region,
                       'label': country.region
                     }
-                  }), 'region')}
-                  
+                  }), 'label')}
+                  onChange={this.changeRegion} value={this.state.value}
                   placeholder="Filter by Region"
                   styles={Select}
                 />
@@ -125,7 +130,6 @@ class App extends Component {
               <Grid>
                 { filteredCountries.map(country => (
                   <li key={ country.alpha3Code }>
-                    
                     <Link to={"/" + country.name } >
                       <CountryCard country={ country } />
                     </Link>

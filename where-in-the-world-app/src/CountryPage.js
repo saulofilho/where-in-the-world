@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import api from './services/api';
 import { Main, MainHeader } from '../src/themes/AppStyles';
+import { MainDiv, CountryInfos, Forms, GridText, LeftText, RightText, Bottom } from '../src/themes/CountryPageStyles';
 import TitleHeader from './Components/Header/TitleHeader';
+import { Title16 } from './themes/CountryCardStyles';
 
 class CountryPage extends Component {
   state = {
@@ -13,7 +16,6 @@ class CountryPage extends Component {
 
   //API
   componentDidMount() {
-    console.log("teste", this.props);
     let id = this.props.match.params.countryPage;
     this.setState({
       id: id
@@ -29,37 +31,36 @@ class CountryPage extends Component {
   };
 
   //DarkMode
-    //DarkMode
-    toggleThemeChange = () => {
-      const { checked } = this.state;
-      if (checked === false) {
-        localStorage.setItem("theme", "dark");
-        document
-          .getElementsByTagName("HTML")[0]
-          .setAttribute("data-theme", localStorage.getItem("theme"));
-        this.setState({
-          checked: true
-        });
-      } else {
-        localStorage.setItem("theme", "light");
-        document
-          .getElementsByTagName("HTML")[0]
-          .setAttribute("data-theme", localStorage.getItem("theme"));
-        this.setState({
-          checked: false
-        });
-      }
-    };
-
+  toggleThemeChange = () => {
+    const { checked } = this.state;
+    if (checked === false) {
+      localStorage.setItem("theme", "dark");
+      document
+        .getElementsByTagName("HTML")[0]
+        .setAttribute("data-theme", localStorage.getItem("theme"));
+      this.setState({
+        checked: true
+      });
+    } else {
+      localStorage.setItem("theme", "light");
+      document
+        .getElementsByTagName("HTML")[0]
+        .setAttribute("data-theme", localStorage.getItem("theme"));
+      this.setState({
+        checked: false
+      });
+    }
+  };
 
   //Render
   render() {
     const { countryData } = this.state;
-
     return (
     <Main>
       <MainHeader>
+      <Link to={"/"} >
         <TitleHeader />
+      </Link>
         <div className="div-switch">
           <label className="switch">
             <input
@@ -71,103 +72,55 @@ class CountryPage extends Component {
           </label>
         </div>
       </MainHeader>
-      <div>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <div>
-          <button>
-            <a href="/">
-              Back
-            </a>
-          </button>
-        </div>
-            { countryData.map(singleCountry => {
-                return (
-                  <div key={singleCountry.alpha3Code}>
-                    <div>
-                    <img src={singleCountry.flag} alt={singleCountry.name}/>
-                    <p>{singleCountry.name}</p>
-                    <p>Native Name: {singleCountry.nativeName}</p>
-                    </div>
-                  </div>
+        <Forms>
+          <Link to={"/"} >
+            <button>Back</button>
+          </Link>
+        </Forms>
+        <MainDiv>
+          <CountryInfos>
+
+            <ul>
+              <li>
+              {countryData.map(singleCountry => {
+              return (
+                <div key={singleCountry.alpha3Code}>
+                  <img src={singleCountry.flag} alt={singleCountry.name} />
+                </div>
                 );
-            }) }
-          </div>
+              })}
+              </li>
+              <li>
+              {countryData.map(singleCountry => {
+              return (
+                <GridText key={singleCountry.alpha3Code}>
+                  <Title16>{singleCountry.name}</Title16>
+                  <LeftText>
+                    <p><span>Native Name:</span> {singleCountry.nativeName}</p>
+                    <p><span>Population:</span> {singleCountry.population}</p>
+                    <p><span>Region:</span> {singleCountry.region}</p>
+                    <p><span>Sub Region:</span> {singleCountry.subregion}</p>
+                    <p><span>Capital:</span> {singleCountry.capital}</p>
+                  </LeftText>
+                  <RightText>
+                    <p><span>Top Level Domain:</span> {singleCountry.topLevelDomain}</p>
+                    <p><span>Currencies: </span> {singleCountry.currencies.name}</p>
+                    <p><span>Languages: </span> {singleCountry.filter}</p>
+                  </RightText>
+                  <Bottom>
+                    <p><span>Border Countries:</span> {singleCountry.borders}</p>
+                  </Bottom>
+                </GridText>
+                );
+              })}
+              </li>
+            </ul>
+
+          </CountryInfos>
+        </MainDiv>
     </Main>
     );
   };
 };
 
 export default CountryPage;
-
-/*
-  render() {
-    const {country} = this.props.match.params
-
-return (
-        <div>
-          <Header />
-            <div>
-              <br/>
-              <br/>
-              <br/>
-              <a href="/">
-              Home
-              </a>
-            </div>
-        </div>
-      );
-  }
-
-
-
-
-class CountryPage extends Component {
-  render() {
-    const {country} = this.props.match.params
-      return (
-        <div>
-          <Header />
-            <div>
-              <div>
-                <button>back</button>
-                <img src={country.flag} alt={country.name}/>
-                <div>
-                  <p>{country.name}</p>
-                  <p>Native Name: {country.nativeName}</p>
-                  <p>Population: {country.population}</p>
-                  <p>name: {country.name}</p>
-                  <p>Sub name: {country.subname}</p>
-                  <p>Capital: {country.capital}</p>
-
-                  <p>Top Level Domain: {country.topLevelDomain}</p>
-                  <p>Currencies: {country.currencies}</p>
-                  <p>Languages: {country.languages}</p>
-
-                  <p>Border Countries: {country.borderCountries}</p>
-                </div>
-              </div>
-            </div>
-        </div>
-      );
-  }
-}
-
-
-
-
-      <div>
-        { countryData.map(country => (
-              <span key={ country.alpha3Code }>
-                <p country={ country }>{countryData.name}</p>
-              </span>
-            ))};
-        <p>{countryData.name}</p>
-        <p>Olá</p>
-        <p>Capital: {countryData.capital}</p>
-      </div>
-*/
