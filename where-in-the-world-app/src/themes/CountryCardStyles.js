@@ -1,8 +1,7 @@
 import styled from 'styled-components';
 
 export const Card = styled.div`
-    color: hsl(0, 0%, 100%);
-    border-radius: 3px;
+    border-radius: 5px;
     height: 400px;
     @media screen and (max-width: 600px) {
         height: auto;
@@ -25,7 +24,7 @@ export const Card = styled.div`
         }
     }
     p {
-        color: hsl(200, 15%, 8%);
+
         font-size: 14px;
     }
     span {
@@ -40,5 +39,4 @@ export const Infos = styled.div`
 export const Title16 = styled.h2`
     font-size: 16px;
     font-weight: 800;
-    color: hsl(200, 15%, 8%);
 `;
