@@ -43,9 +43,11 @@ div .css-1pahdxg-control {
 }
 
 form input,
-button {
+button,
+a {
   background: var(--element-color);
   color: var(--input);
+  text-decoration: none;
 }
 
 .css-26l3qy-menu {
@@ -54,10 +56,6 @@ button {
 
 .css-1ml51p6-MenuList {
   background: var(--element-color);
-}
-
-a {
-  text-decoration: none;
 }
 
 .sc-gqjmRU li {
