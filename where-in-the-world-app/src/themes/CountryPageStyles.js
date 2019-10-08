@@ -57,6 +57,7 @@ export const Forms = styled.div`
 
 export const GridText = styled.div`
   display: grid;
+  grid-gap: 20px;
   grid-template-areas:
     "tit tit"
     "lef  rig"
@@ -64,9 +65,9 @@ export const GridText = styled.div`
   @media screen and (max-width: 800px) {
     grid-template-areas:
         "tit tit"
-        "lef  lef"
-        "rig  rig"
-        "bott  bott";
+        "lef lef"
+        "rig rig"
+        "bott bott";
     grid-gap: 10px;
   }
 `;
@@ -81,9 +82,26 @@ export const LeftText = styled.div`
 
 export const RightText = styled.div`
   grid-area: rig;
-  justify-self: end;
 `;
 
 export const Bottom = styled.div`
   grid-area: bott;
+`;
+
+export const BorderStyle = styled.a`
+  margin: 1rem 1rem 0 0;
+  display: inline-flex;
+  cursor: pointer;
+  font-size: 14px;
+  height: auto;
+  padding: 0.3rem 1.8rem;
+  border-radius: 5px;
+  border: none;
+  box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.2);
+  outline: 1;
+  text-align: center;
+  outline: 1;
+    :hover {
+    box-shadow: 2px 2px 7px rgba(0, 0, 0, 0.2);
+  }
 `;

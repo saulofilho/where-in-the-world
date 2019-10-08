@@ -29,7 +29,7 @@ class App extends Component {
   //API
   componentDidMount() {
     api
-      .get("all")
+      .get("/all/")
       .then((res) => {
       this.setState({ 
         countriesData: res.data 
