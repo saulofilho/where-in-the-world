@@ -1,3 +1,4 @@
+
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import api from "./services/api";
@@ -86,50 +87,8 @@ class CountryPage extends Component {
         </Forms>
         <MainDiv>
           <CountryInfos>
-<<<<<<< HEAD
-<<<<<<< HEAD
-            <ul>
-              <li>
-              {countryData.map(singleCountry => {
-              return (
-                <div key={singleCountry.alpha3Code}>
-                  <img src={singleCountry.flag} alt={singleCountry.name} />
-                </div>
-                );
-              })}
-              </li>
-              <li>
-              {countryData.map(singleCountry => {
-              return (
-                <GridText key={singleCountry.alpha3Code}>
-                  <Title16>{singleCountry.name}</Title16>
-                  <LeftText>
-                    <p><span>Native Name:</span> {singleCountry.nativeName}</p>
-                    <p><span>Population:</span> {singleCountry.population}</p>
-                    <p><span>Region:</span> {singleCountry.region}</p>
-                    <p><span>Sub Region:</span> {singleCountry.subregion}</p>
-                    <p><span>Capital:</span> {singleCountry.capital}</p>
-                  </LeftText>
-                  <RightText>
-                    <p><span>Top Level Domain:</span> {singleCountry.topLevelDomain}</p>
-                    <p><span>Currencies: </span> {singleCountry.currencies.name}</p>
-                    <p><span>Languages: </span> {singleCountry.filter}</p>
-                  </RightText>
-                  <Bottom>
-                    <p><span>Border Countries:</span> {singleCountry.borders}</p>
-                  </Bottom>
-                </GridText>
-                );
-              })}
-              </li>
-            </ul>
-=======
             {countryData.map(singleCountry => {
               return (
-=======
-            {countryData.map(singleCountry => {
-              return (
->>>>>>> 8772d133c36404a7169be2d2e2e8951bb2e17c76
                 <ul>
                   <li key={singleCountry.nameLista}>
                     <div >
@@ -202,10 +161,6 @@ class CountryPage extends Component {
                 </ul>
               );
             })}
-<<<<<<< HEAD
->>>>>>> 8772d133c36404a7169be2d2e2e8951bb2e17c76
-=======
->>>>>>> 8772d133c36404a7169be2d2e2e8951bb2e17c76
           </CountryInfos>
         </MainDiv>
       </Main>
